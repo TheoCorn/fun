@@ -1,17 +1,16 @@
 import os, strformat, osproc
 import cinterface
 
-
 proc getFunFolderDir(): string =
   let cwd = getCurrentDir()
 
   var path = cwd
   while not dirExists(&"{path}/.fun"):
     path = path.parentDir()
-    echo path
-
+    if path.len == 1:
+      echo "Could not find fun directory"
+      quit 3
   return path
-
 
 when isMainModule:
   let funFolderDir =  getFunFolderDir()
